@@ -31,6 +31,10 @@
         }
         .tool-btn:hover { background: #f5f3ff; color: var(--primary); border-bottom-color: #e0e7ff; }
 
+        /* Mobile specific styles */
+        .mobile-nav { display: none; width: 100%; background: white; padding: 15px; border-bottom: 1px solid var(--border); }
+        details summary { font-weight: 800; cursor: pointer; padding: 10px; color: var(--primary); }
+
         .main-content { flex: 1; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; }
         .wrapper { max-width: 800px; width: 100%; }
 
@@ -55,7 +59,8 @@
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 30px 20px; }
+            .sidebar { display: none; }
+            .mobile-nav { display: block; }
             .main-content { padding: 30px 20px; }
         }
     </style>
@@ -63,6 +68,13 @@
 <body>
 
     <div class="top-accent"></div>
+
+    <nav class="mobile-nav">
+        <details>
+            <summary>See more tools</summary>
+            <div id="mobile-tools-list"></div>
+        </details>
+    </nav>
 
     <aside class="sidebar">
         <div class="brand">UtilitySuite</div>
@@ -161,7 +173,10 @@
             { name: "Password Generator", url: "https://zaraouilabs.github.io/Password_Generator/" },
             { name: "Loan Calculator", url: "https://zaraouilabs.github.io/loan-calculator/" }
         ];
-        document.getElementById('tools-sidebar').innerHTML = tools.map(t => `<a href="${t.url}" class="tool-btn">${t.name}</a>`).join('');
+        
+        const toolsHTML = tools.map(t => `<a href="${t.url}" class="tool-btn">${t.name}</a>`).join('');
+        document.getElementById('tools-sidebar').innerHTML = toolsHTML;
+        document.getElementById('mobile-tools-list').innerHTML = toolsHTML;
     </script>
     <script src="https://pl30403648.effectivecpmnetwork.com/8d/6e/16/8d6e16cf626599011a4b1d03060dc5cf.js"></script>
 </body>
